@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mool/screens/auth/signin.dart';
 import 'package:mool/screens/auth/signup.dart';
-import 'package:mool/widgets/welcome/stackImages.dart';
+import 'package:mool/widgets/welcome/stack_images.dart';
 
 class WelcomePage extends StatelessWidget {
   const WelcomePage({super.key});
