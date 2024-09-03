@@ -14,7 +14,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
   Widget build(BuildContext context) {
     // Get the keyboard height
     final keyboardHeight = MediaQuery.of(context).viewInsets.bottom;
-    void _Onsubmit() {
+    void Onsubmit() {
     
       Navigator.push(
         context,
@@ -26,13 +26,13 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
   
 
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 255, 255, 255),
+      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
       body: Stack(
         children: [
           Positioned(
             child: Container(
               height: 410, // Match the height of the previous image
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
@@ -121,15 +121,8 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                               padding: EdgeInsets.only(bottom: keyboardHeight),
                               child: ElevatedButton(
                                 onPressed: () {
-                                  _Onsubmit();
+                                  Onsubmit();
                                 },
-                                child: Text(
-                                  'Submit',
-                                  style: TextStyle(
-                                    color: Color.fromARGB(255, 255, 255, 255),
-                                    fontSize: 20,
-                                  ),
-                                ),
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: Colors.black,
                                   padding: const EdgeInsets.symmetric(
@@ -138,9 +131,16 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                                     borderRadius: BorderRadius.circular(20),
                                   ),
                                 ),
+                                child: const Text(
+                                  'Submit',
+                                  style: TextStyle(
+                                    color: Color.fromARGB(255, 255, 255, 255),
+                                    fontSize: 20,
+                                  ),
+                                ),
                               ),
                             ),
-                            SizedBox(height: 230),
+                            const SizedBox(height: 230),
                           ],
                         ),
                       ),

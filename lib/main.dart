@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:mool/screens/auth/signin.dart';
-import 'package:mool/screens/auth/otp.dart';
-import 'package:mool/screens/auth/forget_password.dart';
-import 'package:mool/screens/auth/reset_password.dart';
-import 'package:mool/screens/auth/signup.dart';
-import 'package:mool/screens/splash.dart';
-import 'package:mool/screens/welcome.dart';
 import 'package:mool/screens/home.dart';
+import 'package:mool/screens/auth/signup.dart';
+
+
 
 
 void main() {
@@ -25,9 +21,9 @@ class MyApp extends StatelessWidget {
       //  home: SignupScreen(),
       //  home: SigninScreen(),
       // home: ResetPasswordScreen(),
-      home: ForgetPasswordScreen(),
+      // home: ForgetPasswordScreen(),
         // home: OtpScreen(),
-        //  home: HOmeScreen(),
+         home: HOmeScreen(),
     );
   }
 }

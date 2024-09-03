@@ -14,15 +14,15 @@ TextField buildTextField({
       fillColor: Colors.white,
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(30),
-        borderSide: const BorderSide(color: Color(0xF5F5F5), width: 2),
+        borderSide: const BorderSide(color: Color(0x00f5f5f5), width: 2),
       ),
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(30),
-        borderSide: const BorderSide(color: Color(0xF5F5F5), width: 2),
+        borderSide: const BorderSide(color: Color(0x00f5f5f5), width: 2),
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(30),
-        borderSide: const BorderSide(color: Color(0xF5F5F5), width: 2),
+        borderSide: const BorderSide(color: Color(0x00f5f5f5), width: 2),
       ),
     ),
     obscureText: obscureText,
@@ -37,15 +37,15 @@ InputDecoration buildInputDecoration(String labelText) {
     fillColor: Colors.white,
     border: OutlineInputBorder(
       borderRadius: BorderRadius.circular(30),
-      borderSide: const BorderSide(color: Color(0xF5F5F5), width: 2),
+      borderSide: const BorderSide(color: Color(0x00f5f5f5), width: 2),
     ),
     enabledBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(30),
-      borderSide: const BorderSide(color: Color(0xF5F5F5), width: 2),
+      borderSide: const BorderSide(color: Color(0x00f5f5f5), width: 2),
     ),
     focusedBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(30),
-      borderSide: const BorderSide(color: Color(0xF5F5F5), width: 2),
+      borderSide: const BorderSide(color: Color(0x00f5f5f5), width: 2),
     ),
   );
 }

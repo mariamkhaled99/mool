@@ -36,6 +36,10 @@ dependencies:
   cupertino_icons: ^1.0.8
   flutter_svg: ^1.0.0
   drop_down_list: ^0.0.7
+  country_flags: ^3.0.0
+  carousel_slider: ^5.0.0
+  flutter_floating_bottom_bar: ^1.2.1+1
+  floating_frosted_bottom_bar: ^0.0.1
 
 
 dev_dependencies:
@@ -71,6 +75,24 @@ flutter:
     - assets/images/Google.png
     - assets/images/Meta.png
     - assets/images/otp.png
+    - assets/images/brands/brand1.png
+    - assets/images/brands/brand2.png
+    - assets/images/brands/brand3.png
+    - assets/images/brands/brand4.png
+    - assets/images/card2.jpeg
+    - assets/images/card1.png
+    - assets/images/summer.png
+    - assets/images/slider2.gif
+    - assets/images/truck-fast.png
+    - assets/images/category/all.png
+    - assets/images/category/sale.png
+    - assets/images/category/Tops.png
+    - assets/images/category/Bottoms.png
+    - assets/images/category/T-Shirts.png
+    - assets/images/category/Dresses.png
+    - assets/images/noti.png
+    - assets/images/filter-search.png
+    - assets/images/sort.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mool/utils/form_utils.dart';
 import 'package:mool/screens/auth/reset_password.dart';
 import 'package:mool/utils/otp_utils.dart';
-import 'package:flutter/services.dart';
 
 class OtpScreen extends StatefulWidget {
   const OtpScreen({super.key});
@@ -44,22 +42,22 @@ class _OtpScreenState extends State<OtpScreen> {
         children: [
           Positioned(
             child: Container(
-              height: 190, // Match the height of the previous image
+              height: 190, 
               decoration: const BoxDecoration(
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
-                    Color(0xFF2A2E33), // First color in the gradient
-                    Color(0xFF292D32), // Second color in the gradient
+                    Color(0xFF2A2E33),
+                    Color(0xFF292D32), 
                   ],
-                  stops: [0.4427, 1.0], // Percentage points for the gradient
+                  stops: [0.4427, 1.0], 
                 ),
               ),
             ),
           ),
           Positioned(
-            top: 0, // Adjust the position as needed
+            top: 0, 
             left: 0,
             right: 0,
             child: Container(
@@ -145,7 +143,7 @@ class _OtpScreenState extends State<OtpScreen> {
                               const Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceAround,
-                                children: const [
+                                children: [
                                   OtpField(),
                                   OtpField(),
                                   OtpField(),
@@ -163,13 +161,7 @@ class _OtpScreenState extends State<OtpScreen> {
                                         fontWeight: FontWeight.bold,
                                       ),
                                     ),
-                                    // Text(
-                                    //   '+961518745363 ',
-                                    //   style: TextStyle(
-                                    //     color: Color.fromARGB(255, 0, 0, 0),
-                                    //     fontWeight: FontWeight.bold,
-                                    //   ),
-                                    // )
+                                    
                                   ]),
                               const SizedBox(height: 60),
                               Padding(
@@ -177,19 +169,19 @@ class _OtpScreenState extends State<OtpScreen> {
                                     EdgeInsets.only(bottom: keyboardHeight),
                                 child: ElevatedButton(
                                   onPressed: _submitForm,
-                                  child: const Text(
-                                    'Submit',
-                                    style: TextStyle(
-                                      color: Color.fromARGB(255, 255, 255, 255),
-                                      fontSize: 20,
-                                    ),
-                                  ),
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor: Colors.black,
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 150, vertical: 15),
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(20),
+                                    ),
+                                  ),
+                                  child:  const Text(
+                                    'Submit',
+                                    style: TextStyle(
+                                      color: Color.fromARGB(255, 255, 255, 255),
+                                      fontSize: 20,
                                     ),
                                   ),
                                 ),

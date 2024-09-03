@@ -12,7 +12,7 @@ class SignupScreen extends StatefulWidget {
 
 class _SignupScreenState extends State<SignupScreen> {
   String? _selectedCountry;
-  final List<String> _countries = ['USA', 'Canada', 'UK', 'India', 'Australia'];
+  final List<String> _countries = [ 'Saudi Arabia',  'Egypt','United Arab Emirates'];
 
   @override
   Widget build(BuildContext context) {
@@ -107,30 +107,16 @@ class _SignupScreenState extends State<SignupScreen> {
                             const SizedBox(height: 10),
                             buildTextField(labelText: 'Email'),
                             const SizedBox(height: 10),
-                            // DropdownButtonFormField<String>(
-                            //   decoration: buildInputDecoration('Country'),
-                            //   value: _selectedCountry,
-                            //   items: _countries
-                            //       .map((country) => DropdownMenuItem(
-                            //             value: country,
-                            //             child: Text(country),
-                            //           ))
-                            //       .toList(),
-                            //   onChanged: (value) {
-                            //     setState(() {
-                            //       _selectedCountry = value;
-                            //     });
-                            //   },
-                            // ),
-                            //  CustomDropdown(
-                            //   items: _countries,
-                            //   selectedValue: _selectedCountry,
-                            //   onChanged: (value) {
-                            //     setState(() {
-                            //       _selectedCountry = value;
-                            //     });
-                            //   },
-                            // ),
+                          
+                             CustomDropdown(
+                              items: _countries,
+                              selectedValue: _selectedCountry,
+                              onChanged: (value) {
+                                setState(() {
+                                  _selectedCountry = value;
+                                });
+                              },
+                            ),
                             const SizedBox(height: 10),
                             Row(
                               children: [
@@ -155,19 +141,19 @@ class _SignupScreenState extends State<SignupScreen> {
                               onPressed: () {
                                 // Add signup logic here
                               },
-                               child: Text(
-                                'Sign Up',
-                                style: TextStyle(
-                                  color: Color.fromARGB(255, 255, 255, 255),
-                                  fontSize: 20,
-                                ),
-                              ),
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.black,
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 150, vertical: 15),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(20),
+                                ),
+                              ),
+                               child: const Text(
+                                'Sign Up',
+                                style: TextStyle(
+                                  color: Color.fromARGB(255, 255, 255, 255),
+                                  fontSize: 20,
                                 ),
                               ),
                             ),
@@ -203,6 +189,7 @@ class _SignupScreenState extends State<SignupScreen> {
                             ),
                             const SizedBox(height: 20),
                             const Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 SizedBox(
                                   width: 100,
@@ -212,7 +199,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                                  padding: EdgeInsets.symmetric(horizontal: 10),
                                   child: Text(
                                     'OR',
                                     style: TextStyle(
@@ -229,7 +216,6 @@ class _SignupScreenState extends State<SignupScreen> {
                                   ),
                                 ),
                               ],
-                              mainAxisAlignment: MainAxisAlignment.center,
                             ),
                             const SizedBox(height: 20),
                             Row(
@@ -240,13 +226,13 @@ class _SignupScreenState extends State<SignupScreen> {
                                   width: 50,
                                   height: 50,
                                 ),
-                                SizedBox(width: 20),
+                                const SizedBox(width: 20),
                                 Image.asset(
                                   'assets/images/Google.png',
                                   width: 50,
                                   height: 50,
                                 ),
-                                SizedBox(width: 20),
+                                const SizedBox(width: 20),
                                 Image.asset(
                                   'assets/images/Meta.png',
                                   width: 50,

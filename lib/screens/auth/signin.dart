@@ -124,10 +124,10 @@ class _SigninScreenState extends State<SigninScreen> {
                                   ),
                                 );
                               },
-                              child: Padding(
+                              child: const Padding(
                                 padding: EdgeInsets.only(
                                     left: 160.0), // Apply right padding
-                                child: const Text(
+                                child: Text(
                                   'Forget Password ?',
                                   textAlign: TextAlign.right,
                                   style: TextStyle(
@@ -142,19 +142,19 @@ class _SigninScreenState extends State<SigninScreen> {
                               onPressed: () {
                                 // Add signup logic here
                               },
-                              child: Text(
-                                'Sign Up',
-                                style: TextStyle(
-                                  color: Color.fromARGB(255, 255, 255, 255),
-                                  fontSize: 20,
-                                ),
-                              ),
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.black,
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 150, vertical: 15),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(20),
+                                ),
+                              ),
+                              child: const Text(
+                                'Sign Up',
+                                style: TextStyle(
+                                  color: Color.fromARGB(255, 255, 255, 255),
+                                  fontSize: 20,
                                 ),
                               ),
                             ),
@@ -190,6 +190,7 @@ class _SigninScreenState extends State<SigninScreen> {
                             ),
                             const SizedBox(height: 20),
                             const Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 SizedBox(
                                   width: 100,
@@ -199,7 +200,7 @@ class _SigninScreenState extends State<SigninScreen> {
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.symmetric(
+                                  padding: EdgeInsets.symmetric(
                                       horizontal: 10),
                                   child: Text(
                                     'OR',
@@ -217,7 +218,6 @@ class _SigninScreenState extends State<SigninScreen> {
                                   ),
                                 ),
                               ],
-                              mainAxisAlignment: MainAxisAlignment.center,
                             ),
                             const SizedBox(height: 20),
                             Row(
@@ -228,13 +228,13 @@ class _SigninScreenState extends State<SigninScreen> {
                                   width: 50,
                                   height: 50,
                                 ),
-                                SizedBox(width: 20),
+                                const SizedBox(width: 20),
                                 Image.asset(
                                   'assets/images/Google.png',
                                   width: 50,
                                   height: 50,
                                 ),
-                                SizedBox(width: 20),
+                                const SizedBox(width: 20),
                                 Image.asset(
                                   'assets/images/Meta.png',
                                   width: 50,
