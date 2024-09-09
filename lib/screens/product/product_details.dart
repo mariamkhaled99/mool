@@ -34,13 +34,7 @@ class ProductDetailsScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 10),
-                  // Text(
-                  //   product.title,
-                  //   style: const TextStyle(
-                  //     fontSize: 22.0,
-                  //     fontWeight: FontWeight.bold,
-                  //   ),
-                  // ),
+                  
                 ],
               ),
             );

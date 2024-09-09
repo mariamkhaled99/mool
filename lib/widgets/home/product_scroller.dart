@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mool/models/products.dart';
 import 'package:mool/widgets/home/product_card.dart';
+import 'package:mool/providers/favourite_provider.dart';
 
-class ProductScroller extends StatefulWidget {
-  const ProductScroller({super.key, required List<Product> products});
+class ProductScroller extends ConsumerWidget {
+  final List<Product> products;
+
+  const ProductScroller({super.key, required this.products});
 
   @override
-  _ProductScrollerState createState() => _ProductScrollerState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    // Get the list of favorite products from the provider
+    final favouriteProducts = ref.watch(favouriteProductsProvider);
 
-class _ProductScrollerState extends State<ProductScroller> {
-  @override
-  Widget build(BuildContext context) {
     return Container(
-      height: 250.0, 
+      height: 250.0,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: products.length,
@@ -22,14 +24,14 @@ class _ProductScrollerState extends State<ProductScroller> {
 
           return ProductCard(
             product: product,
-            onFavoriteTap: () {
-              setState(() {
-                // Handle favorite icon tap (toggle logic here)
-              });
-            },
             onAddTap: () {
-              // Handle add icon tap
+              // Handle add to cart tap
             },
+            // onFavoriteTap: () {
+            //   // Toggle favorite status through the provider
+            //   ref.read(favouriteProductsProvider.notifier).toggleFavorite(product);
+            // },
+            // isFavorite: favouriteProducts.contains(product), 
           );
         },
       ),

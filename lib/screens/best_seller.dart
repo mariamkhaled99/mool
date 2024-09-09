@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mool/models/products.dart';
-import 'package:mool/screens/product/product_card.dart';
+import 'package:mool/screens/filters.dart';
+import 'package:mool/widgets/category_buttons.dart';
 import 'package:mool/widgets/fliter_sort.dart';
-import 'package:mool/widgets/home/product_card.dart'; // Ensure you have this import
+import 'package:mool/widgets/home/product_card.dart';
+import 'package:mool/providers/favourite_provider.dart'; // Ensure you have this import
 
-class BestSellerScreen extends StatefulWidget {
+class BestSellerScreen extends ConsumerStatefulWidget {
   final List<Product> products;
 
   const BestSellerScreen({
@@ -13,17 +16,145 @@ class BestSellerScreen extends StatefulWidget {
   });
 
   @override
-  State<BestSellerScreen> createState() => _BestSellerScreenState();
+  _BestSellerScreenState createState() => _BestSellerScreenState();
 }
 
-class _BestSellerScreenState extends State<BestSellerScreen> {
+class _BestSellerScreenState extends ConsumerState<BestSellerScreen> {
   bool _isSearchOpen = false;
   TextEditingController _searchController = TextEditingController();
+  List<Product> filteredProducts = [];
+  int selectedSortingIndex = 0; // Keep track of the selected sorting option
+
+  @override
+  void initState() {
+    super.initState();
+    filteredProducts = widget.products;
+  }
+
+  void onCategorySelected(String category) {
+    setState(() {
+      if (category == "View All") {
+        filteredProducts = widget.products;
+      } else {
+        filteredProducts = widget.products.where((product) {
+          return product.category == category;
+        }).toList();
+      }
+    });
+  }
+
+  void _applySorting() {
+    setState(() {
+      if (selectedSortingIndex == 0) {
+        filteredProducts.sort((a, b) => a.price.compareTo(b.price)); // Low to High
+      } else if (selectedSortingIndex == 1) {
+        filteredProducts.sort((a, b) => b.price.compareTo(a.price)); // High to Low
+      } else if (selectedSortingIndex == 2) {
+        // New Arrival - Assuming `dateAdded` is a field in Product
+        filteredProducts.sort((a, b) => b.dateAdded.compareTo(a.dateAdded));
+      } else if (selectedSortingIndex == 3) {
+        filteredProducts.sort((a, b) => b.rating.compareTo(a.rating)); // High to Low
+      }
+    });
+  }
+
+  void _showSortingBottomSheet() {
+    showModalBottomSheet(
+      context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20.0)),
+      ),
+      builder: (BuildContext context) {
+        return StatefulBuilder(
+          builder: (BuildContext context, StateSetter setState) {
+            return Padding(
+              padding: const EdgeInsets.symmetric(vertical: 16.0),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 16.0),
+                    child: Text(
+                      'Sorting',
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+
+                  // RadioListTile for sorting options with radio buttons on the right
+                  RadioListTile<int>(
+                    value: 0,
+                    groupValue: selectedSortingIndex,
+                    title: const Text('Price: Low to High'),
+                    onChanged: (int? value) {
+                      setState(() {
+                        selectedSortingIndex = value!;
+                        _applySorting();
+                      });
+                    },
+                    controlAffinity: ListTileControlAffinity.trailing, // Move radio to the right
+                    activeColor: Colors.black,
+                  ),
+                  RadioListTile<int>(
+                    value: 1,
+                    groupValue: selectedSortingIndex,
+                    title: const Text('Price: High to Low'),
+                    onChanged: (int? value) {
+                      setState(() {
+                        selectedSortingIndex = value!;
+                        _applySorting();
+                      });
+                    },
+                    controlAffinity: ListTileControlAffinity.trailing,
+                    activeColor: Colors.black,
+                  ),
+                  RadioListTile<int>(
+                    value: 2,
+                    groupValue: selectedSortingIndex,
+                    title: const Text('Best Seller'),
+                    onChanged: (int? value) {
+                      setState(() {
+                        selectedSortingIndex = value!;
+                        _applySorting();
+                      });
+                    },
+                    controlAffinity: ListTileControlAffinity.trailing,
+                    activeColor: Colors.black,
+                  ),
+                  RadioListTile<int>(
+                    value: 3,
+                    groupValue: selectedSortingIndex,
+                    title: const Text('Rating: High to Low'),
+                    onChanged: (int? value) {
+                      setState(() {
+                        selectedSortingIndex = value!;
+                        _applySorting();
+                      });
+                    },
+                    controlAffinity: ListTileControlAffinity.trailing,
+                    activeColor: Colors.black,
+                  ),
+                  const SizedBox(height: 20),
+                ],
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
+    final favouriteProducts = ref.watch(favouriteProductsProvider);
+
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: const Color.fromARGB(255, 241, 237, 237),
       appBar: AppBar(
         backgroundColor: Colors.black,
         toolbarHeight: 100,
@@ -34,7 +165,7 @@ class _BestSellerScreenState extends State<BestSellerScreen> {
           },
         ),
         title: const Text(
-          'Best Sellers',
+          'New Arrival',
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
@@ -90,27 +221,25 @@ class _BestSellerScreenState extends State<BestSellerScreen> {
       ),
       body: Column(
         children: [
+          CategoryButtons(onCategorySelected: onCategorySelected),
           Expanded(
             child: Padding(
               padding: const EdgeInsets.all(16.0),
               child: GridView.builder(
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2, // Number of columns
+                  crossAxisCount: 2,
                   crossAxisSpacing: 10,
                   mainAxisSpacing: 8,
-                  childAspectRatio: 0.7, 
+                  childAspectRatio: 0.7,
                 ),
-                itemCount: widget.products.length,
+                itemCount: filteredProducts.length,
                 itemBuilder: (context, index) {
-                  final product = widget.products[index];
+                  final product = filteredProducts[index];
                   return ProductCard(
                     product: product,
-                    onFavoriteTap: () {
-                      // Handle favorite tap
-                    },
                     onAddTap: () {
-                      // Handle add to cart tap
                     },
+                   
                   );
                 },
               ),
@@ -118,7 +247,17 @@ class _BestSellerScreenState extends State<BestSellerScreen> {
           ),
           Container(
             color: Colors.white,
-            child: FliterSort(), 
+            child: FliterSort(
+              onSortPressed: _showSortingBottomSheet,
+              onFilterPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const FiltersScreen(),
+                  ),
+                );
+              },
+            ),
           ),
         ],
       ),

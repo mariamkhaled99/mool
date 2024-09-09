@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:mool/models/products.dart';
 import 'package:mool/screens/categories.dart';
 import 'package:mool/screens/home.dart';
+import 'package:mool/screens/my_list.dart';
 
-class CustomNavbar extends StatefulWidget {
+
+class CustomNavbar extends ConsumerStatefulWidget {
   final int selectedIndex;
   const CustomNavbar({super.key, required this.selectedIndex});
 
@@ -10,31 +14,19 @@ class CustomNavbar extends StatefulWidget {
   _CustomNavbarState createState() => _CustomNavbarState();
 }
 
-class _CustomNavbarState extends State<CustomNavbar> {
-  late int _selectedIndex; // Define state variable
+class _CustomNavbarState extends ConsumerState<CustomNavbar> {
+  late int _selectedIndex;
 
   @override
   void initState() {
     super.initState();
-    _selectedIndex = widget.selectedIndex; // Initialize state with widget value
+    _selectedIndex = widget.selectedIndex;
   }
 
   void _onItemTapped(int index) {
     setState(() {
-      _selectedIndex = index; // Update state
+      _selectedIndex = index;
     });
-
-    if (index == 0) {
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => const HOmeScreen()));
-    } else if (index == 1) {
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => const Categories()));
-    } else if (index == 2) {
-      // Handle navigation for index 2
-    } else if (index == 3) {
-      // Handle navigation for index 3
-    }
   }
 
   @override
@@ -57,7 +49,11 @@ class _CustomNavbarState extends State<CustomNavbar> {
                       ? const Color(0xFF33CCCC)
                       : Colors.white,
                 ),
-                onPressed: () => _onItemTapped(0),
+                onPressed: () => Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => HOmeScreen(),
+                  ),
+                ),
               ),
               IconButton(
                 icon: Icon(
@@ -66,17 +62,21 @@ class _CustomNavbarState extends State<CustomNavbar> {
                       ? const Color(0xFF33CCCC)
                       : Colors.white,
                 ),
-                onPressed: () => _onItemTapped(1),
+                onPressed: () => Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => const Categories())),
               ),
               IconButton(
-                icon: Icon(
-                  Icons.play_circle,
-                  color: _selectedIndex == 2
-                      ? const Color(0xFF33CCCC)
-                      : Colors.white,
-                ),
-                onPressed: () => _onItemTapped(2),
-              ),
+                  icon: Icon(
+                    Icons.play_circle,
+                    color: _selectedIndex == 2
+                        ? const Color(0xFF33CCCC)
+                        : Colors.white,
+                  ),
+                  onPressed: () => Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => MyListScreen(),
+                        ),
+                      )),
               IconButton(
                 icon: Icon(
                   Icons.shopping_bag,

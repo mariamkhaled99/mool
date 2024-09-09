@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart'; // Import the Riverpod package
 import 'package:mool/screens/home.dart';
 import 'package:mool/screens/auth/signup.dart';
 
@@ -6,7 +7,7 @@ import 'package:mool/screens/auth/signup.dart';
 
 
 void main() {
-  runApp(const MyApp());
+  runApp(const ProviderScope(child: MyApp())); // Wrap your app with ProviderScope
 }
 
 class MyApp extends StatelessWidget {
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return  MaterialApp(
       // theme: theme,
       // home: SplashScreen(),
       // home: WelcomePage(),

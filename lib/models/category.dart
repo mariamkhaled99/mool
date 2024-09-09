@@ -29,16 +29,16 @@ final List<Category> categories = [
       index: 4),
   Category(
       title: 'View All', imagePath: 'assets/images/category/all.png', index: 5),
-      Category(
-      title: 'Bottoms',
-      imagePath: 'assets/images/category/Bottoms.png',
-      index: 6),
-  Category(
-      title: 'T-Shirts',
-      imagePath: 'assets/images/category/T-Shirts.png',
-      index: 7),
-  Category(
-      title: 'Dresses',
-      imagePath: 'assets/images/category/Dresses.png',
-      index: 8),
+      // Category(
+      // title: 'Bottoms',
+      // imagePath: 'assets/images/category/Bottoms.png',
+      // index: 6),
+  // Category(
+  //     title: 'T-Shirts',
+  //     imagePath: 'assets/images/category/T-Shirts.png',
+  //     index: 7),
+  // Category(
+  //     title: 'Dresses',
+  //     imagePath: 'assets/images/category/Dresses.png',
+  //     index: 8),
 ];

@@ -1,21 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mool/models/products.dart';
 import 'package:mool/screens/product/product_details.dart';
+import 'package:mool/providers/favourite_provider.dart';
 
-class ProductCard extends StatelessWidget {
+class ProductCard extends ConsumerWidget {
   final Product product;
-  final VoidCallback onFavoriteTap;
   final VoidCallback onAddTap;
 
   const ProductCard({
     Key? key,
     required this.product,
-    required this.onFavoriteTap,
     required this.onAddTap,
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final isFavorite = ref.watch(favouriteProductsProvider).contains(product);
+
     return GestureDetector(
       onTap: () {
         Navigator.push(
@@ -47,7 +49,6 @@ class ProductCard extends StatelessWidget {
                       fit: BoxFit.cover,
                     ),
                   ),
-
                   // Title and Price Section
                   Padding(
                     padding: const EdgeInsets.all(4.0),
@@ -74,13 +75,14 @@ class ProductCard extends StatelessWidget {
                   ),
                 ],
               ),
-
               // Favorite Icon on Top Right
               Positioned(
                 top: 8,
                 right: 8,
                 child: GestureDetector(
-                  onTap: onFavoriteTap,
+                  onTap: () {
+                    ref.read(favouriteProductsProvider.notifier).toggleFavorite(product);
+                  },
                   child: Container(
                     padding: const EdgeInsets.all(4.0),
                     decoration: BoxDecoration(
@@ -88,16 +90,15 @@ class ProductCard extends StatelessWidget {
                       border: Border.all(color: Colors.white, width: 2.0),
                       color: Colors.white,
                     ),
-                    child: const Icon(
-                      Icons.favorite_border,
-                      color: Colors.black,
+                    child: Icon(
+                      isFavorite ? Icons.favorite : Icons.favorite_border,
+                      color: isFavorite ? Colors.red : Colors.black,
                       size: 24.0,
                     ),
                   ),
                 ),
               ),
-
-              // Add Button at Bottom Right Corner, clipped
+              // Add Button at Bottom Right Corner
               Positioned(
                 bottom: -3,
                 right: -3,
