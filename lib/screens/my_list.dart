@@ -197,10 +197,7 @@ class _MyListScreenState extends ConsumerState<MyListScreen> {
                         return ProductCard(
                           product: product,
                           
-                          onAddTap: () {
-                            // Handle add to cart tap
-                          },
-                          // isFavorite: true, // Set this based on provider if needed
+                       
                         );
                       },
                     ),

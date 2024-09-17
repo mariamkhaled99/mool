@@ -1,26 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mool/models/products.dart';
+import 'package:mool/providers/gender_provider.dart';
 import 'package:mool/screens/best_seller.dart';
 import 'package:mool/screens/new_arrival.dart';
 import 'package:mool/screens/notification.dart';
+import 'package:mool/screens/search.dart';
 import 'package:mool/widgets/home/brand.dart';
 import 'package:mool/widgets/home/category_scroller.dart';
 import 'package:mool/widgets/home/home_card.dart';
 import 'package:mool/widgets/home/slider.dart';
 import '../widgets/home/navbar.dart';
 import '../widgets/home/product_scroller.dart';
-import 'package:mool/providers/favourite_provider.dart'; // Import the provider
+import 'package:mool/providers/favourite_provider.dart';
+
 class HOmeScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final favouriteProducts = ref.watch(favouriteProductsProvider);
-    final favouriteProductsNotifier = ref.read(favouriteProductsProvider.notifier);
+    // GenderProvider
 
-    String selectedCategory = 'Women';
-    bool _isSearchOpen = false;
-    TextEditingController _searchController = TextEditingController();
-        
+     final selectedGender = ref.watch(genderProvider);
+      
+    final favouriteProducts = ref.watch(favouriteProductsProvider);
+    final favouriteProductsNotifier =
+        ref.read(favouriteProductsProvider.notifier);
+
+  
+    
 
     return Scaffold(
       appBar: AppBar(
@@ -49,14 +55,15 @@ class HOmeScreen extends ConsumerWidget {
                     children: [
                       TextButton(
                         onPressed: () {
-                          selectedCategory = 'Women';
-                        },
+                    // Update the state using GenderNotifier
+                    ref.read(genderProvider.notifier).selectGender('Women');
+                  },
                         child: Column(
                           children: [
                             Text(
                               'Women',
                               style: TextStyle(
-                                color: selectedCategory == 'Women'
+                                color: selectedGender == 'Women'
                                     ? Colors.white
                                     : Colors.grey,
                                 fontWeight: FontWeight.bold,
@@ -65,7 +72,7 @@ class HOmeScreen extends ConsumerWidget {
                             Container(
                               height: 2,
                               width: 50,
-                              color: selectedCategory == 'Women'
+                              color: selectedGender == 'Women'
                                   ? Colors.white
                                   : Colors.transparent,
                             ),
@@ -75,14 +82,15 @@ class HOmeScreen extends ConsumerWidget {
                       const SizedBox(width: 20),
                       TextButton(
                         onPressed: () {
-                          selectedCategory = 'Men';
-                        },
+                    // Update the state using GenderNotifier
+                    ref.read(genderProvider.notifier).selectGender('Men');
+                  },
                         child: Column(
                           children: [
                             Text(
                               'Men',
                               style: TextStyle(
-                                color: selectedCategory == 'Men'
+                                color: selectedGender == 'Men'
                                     ? Colors.white
                                     : Colors.grey,
                                 fontWeight: FontWeight.bold,
@@ -91,7 +99,7 @@ class HOmeScreen extends ConsumerWidget {
                             Container(
                               height: 2,
                               width: 50,
-                              color: selectedCategory == 'Men'
+                              color: selectedGender == 'Men'
                                   ? Colors.white
                                   : Colors.transparent,
                             ),
@@ -107,9 +115,7 @@ class HOmeScreen extends ConsumerWidget {
                   child: IconButton(
                     icon: Image.asset('assets/images/logo.png',
                         width: 100, height: 100),
-                    onPressed: () {
-                      // Handle logo action if needed
-                    },
+                    onPressed: () {},
                   ),
                 ),
                 Positioned(
@@ -117,34 +123,40 @@ class HOmeScreen extends ConsumerWidget {
                   right: 0,
                   child: Row(
                     children: [
-                      if (_isSearchOpen)
-                        Container(
-                          width: 200,
-                          margin: const EdgeInsets.only(right: 10),
-                          child: TextField(
-                            controller: _searchController,
-                            decoration: InputDecoration(
-                              hintText: 'Search...',
-                              fillColor: Colors.white,
-                              filled: true,
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(20),
-                                borderSide: BorderSide.none,
-                              ),
-                            ),
-                            style: const TextStyle(color: Colors.black),
-                          ),
-                        ),
+                      // if (_isSearchOpen)
+                      //   Container(
+                      //     width: 200,
+                      //     margin: const EdgeInsets.only(right: 10),
+                      //     child: TextField(
+                      //       controller: _searchController,
+                      //       decoration: InputDecoration(
+                      //         hintText: 'Search...',
+                      //         fillColor: Colors.white,
+                      //         filled: true,
+                      //         border: OutlineInputBorder(
+                      //           borderRadius: BorderRadius.circular(20),
+                      //           borderSide: BorderSide.none,
+                      //         ),
+                      //       ),
+                      //       style: const TextStyle(color: Colors.black),
+                      //     ),
+                      //   ),
                       IconButton(
-                        icon: Icon(
-                          _isSearchOpen ? Icons.close : Icons.search,
+                        icon: Image.asset(
+                          'assets/images/search-normal.png',
                           color: Colors.white,
-                          size: 30, // Increased icon size
+                          width: 30,
+                          height: 30,
                         ),
                         onPressed: () {
-                          _isSearchOpen = !_isSearchOpen;
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => const SearchScreen(),
+                            ),
+                          );
                         },
                       ),
+
                       IconButton(
                         icon: const Icon(
                           Icons.notifications,
@@ -210,7 +222,8 @@ class HOmeScreen extends ConsumerWidget {
                     () => Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => BestSellerScreen(products: products),
+                        builder: (context) =>
+                            BestSellerScreen(products: products),
                       ),
                     ),
                     products,
@@ -226,7 +239,8 @@ class HOmeScreen extends ConsumerWidget {
                     () => Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => NewArrivalScreen(products: arrival_products),
+                        builder: (context) =>
+                            NewArrivalScreen(products: arrival_products),
                       ),
                     ),
                     arrival_products,
@@ -244,7 +258,8 @@ class HOmeScreen extends ConsumerWidget {
             bottom: 0,
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
-              child: CustomNavbar(selectedIndex: 0), // CustomNavbar remains on top
+              child:
+                  CustomNavbar(selectedIndex: 0), // CustomNavbar remains on top
             ),
           ),
         ],
@@ -257,7 +272,7 @@ class HOmeScreen extends ConsumerWidget {
     String title,
     VoidCallback onSeeAllPressed,
     List<Product> products,
-  //  List<Product> arrival_products ,
+    //  List<Product> arrival_products ,
     List<Product> favouriteProducts,
     Function(Product) onFavoriteTap,
   ) {
@@ -301,7 +316,6 @@ class HOmeScreen extends ConsumerWidget {
         const SizedBox(height: 10),
         ProductScroller(
           products: products,
-         
         ),
       ],
     );

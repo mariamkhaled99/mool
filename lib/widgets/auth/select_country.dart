@@ -35,92 +35,89 @@ class _CustomDropdownState extends State<CustomDropdown> {
         borderRadius: BorderRadius.vertical(top: Radius.circular(20.0)),
       ),
       builder: (BuildContext context) {
-        return Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            const Padding(
-              padding: EdgeInsets.symmetric(vertical: 16.0),
-              child: Text(
-                'Select a country',
-                style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.grey),
-              ),
-            ),
-            ..._items.map((item) {
-              bool isSelected = _selectedValue == item;
-              return ListTile(
-                leading: CountryFlag.fromCountryCode(
-                  getCountryCode(item),
-                  width: 32,
-                  height: 28,
+        return StatefulBuilder(
+          builder: (BuildContext context, StateSetter setState) {
+            return Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 16.0),
+                  child: Text(
+                    'Select a country',
+                    style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.grey),
+                  ),
                 ),
-                title: Text(item),
-                trailing: isSelected
-                    ? Container(
-                        decoration: BoxDecoration(
-                          color: Colors.black, 
-                          border: Border.all(
+                ..._items.map((item) {
+                  bool isSelected = _selectedValue == item;
+                  return ListTile(
+                    leading: CountryFlag.fromCountryCode(
+                      getCountryCode(item),
+                      width: 32,
+                      height: 28,
+                    ),
+                    title: Text(item),
+                    trailing: isSelected
+                        ? Container(
+                            decoration: BoxDecoration(
                               color: Colors.black,
-                              width: 2), 
-                          borderRadius: BorderRadius.circular(
-                              18), 
-                        ),
-                        padding: const EdgeInsets.all(
-                            5), 
-                        child: const Icon(
-                          Icons.check,
-                          color: Colors.white, 
-                        ),
-                      )
-                    : Container(
-                        decoration: BoxDecoration(
-                          
-                          border: Border.all(
-                              color: Colors.black,
-                              width: 2), 
-                          borderRadius: BorderRadius.circular(
-                              18), 
-                        ),
-                        padding: const EdgeInsets.all(
-                            5), 
-                        child: const Icon(
-                          Icons.check,
-                         
-                        ),
-                      ),
-                onTap: () {
-                  setState(() {
-                    _selectedValue = item;
-                    widget.onChanged(_selectedValue);
-                  });
-                },
-              );
-            }),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pop(context); // Close the bottom sheet
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.black,
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 150, vertical: 5),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
+                              border: Border.all(
+                                  color: Colors.black,
+                                  width: 2),
+                              borderRadius: BorderRadius.circular(18),
+                            ),
+                            padding: const EdgeInsets.all(5),
+                            child: const Icon(
+                              Icons.check,
+                              color: Colors.white,
+                            ),
+                          )
+                        : Container(
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                  color: Colors.black,
+                                  width: 2),
+                              borderRadius: BorderRadius.circular(18),
+                            ),
+                            padding: const EdgeInsets.all(5),
+                            child: const Icon(
+                              Icons.check,
+                            ),
+                          ),
+                    onTap: () {
+                      setState(() {
+                        _selectedValue = item;
+                        widget.onChanged(_selectedValue);
+                      });
+                    },
+                  );
+                }),
+                const SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(context); // Close the bottom sheet
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.black,
+                    padding: const EdgeInsets.symmetric(horizontal: 150, vertical: 5),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                  ),
+                  child: const Text(
+                    'Continue',
+                    style: TextStyle(
+                      color: Color.fromARGB(255, 255, 255, 255),
+                      fontSize: 20,
+                    ),
+                  ),
                 ),
-              ),
-              child: const Text(
-                'Continue',
-                style: TextStyle(
-                  color: Color.fromARGB(255, 255, 255, 255),
-                  fontSize: 20,
-                ),
-              ),
-            ),
-            const SizedBox(height: 40),
-          ],
+                const SizedBox(height: 40),
+              ],
+            );
+          },
         );
       },
     );
@@ -134,7 +131,6 @@ class _CustomDropdownState extends State<CustomDropdown> {
         onTap: _showBottomSheet,
         child: InputDecorator(
           decoration: InputDecoration(
-           
             filled: true,
             fillColor: Colors.white,
             border: OutlineInputBorder(
@@ -161,8 +157,7 @@ class _CustomDropdownState extends State<CustomDropdown> {
                 Row(
                   children: [
                     CountryFlag.fromCountryCode(
-                      getCountryCode(
-                          _selectedValue), // Fetch flag using country code
+                      getCountryCode(_selectedValue),
                       width: 24,
                       height: 24,
                     ),
@@ -184,7 +179,6 @@ class _CustomDropdownState extends State<CustomDropdown> {
     );
   }
 
-  // Helper function to map country name to country code
   String getCountryCode(String countryName) {
     switch (countryName) {
       case 'United Arab Emirates':
@@ -193,7 +187,6 @@ class _CustomDropdownState extends State<CustomDropdown> {
         return 'sa';
       case 'Egypt':
         return 'eg';
-
       default:
         return 'eg';
     }

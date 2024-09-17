@@ -5,7 +5,7 @@ import 'package:mool/screens/filters.dart';
 import 'package:mool/widgets/category_buttons.dart';
 import 'package:mool/widgets/fliter_sort.dart';
 import 'package:mool/widgets/home/product_card.dart';
-import 'package:mool/providers/favourite_provider.dart'; // Ensure you have this import
+
 
 class BestSellerScreen extends ConsumerStatefulWidget {
   final List<Product> products;
@@ -151,8 +151,8 @@ class _BestSellerScreenState extends ConsumerState<BestSellerScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final favouriteProducts = ref.watch(favouriteProductsProvider);
-
+    // final favouriteProducts = ref.watch(favouriteProductsProvider);
+    // final CartProducts  = ref.watch(cartProvider);
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 241, 237, 237),
       appBar: AppBar(
@@ -237,8 +237,7 @@ class _BestSellerScreenState extends ConsumerState<BestSellerScreen> {
                   final product = filteredProducts[index];
                   return ProductCard(
                     product: product,
-                    onAddTap: () {
-                    },
+                    
                    
                   );
                 },

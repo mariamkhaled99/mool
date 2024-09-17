@@ -26,7 +26,8 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
   
 
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+      backgroundColor:const Color.fromARGB(255, 241, 237, 237),
+      resizeToAvoidBottomInset: false, 
       body: Stack(
         children: [
           Positioned(

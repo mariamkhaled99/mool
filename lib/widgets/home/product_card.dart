@@ -3,20 +3,25 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mool/models/products.dart';
 import 'package:mool/screens/product/product_details.dart';
 import 'package:mool/providers/favourite_provider.dart';
+import 'package:mool/providers/add_cart_provider.dart';
 
 class ProductCard extends ConsumerWidget {
   final Product product;
-  final VoidCallback onAddTap;
+  // final VoidCallback onAddTap;
 
   const ProductCard({
     Key? key,
     required this.product,
-    required this.onAddTap,
+    // required this.onAddTap,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isFavorite = ref.watch(favouriteProductsProvider).contains(product);
+     final isInCart  = ref.watch(cartProvider).contains(product);
+    
+    
+    
 
     return GestureDetector(
       onTap: () {
@@ -98,7 +103,7 @@ class ProductCard extends ConsumerWidget {
                   ),
                 ),
               ),
-              // Add Button at Bottom Right Corner
+            
               Positioned(
                 bottom: -3,
                 right: -3,
@@ -107,18 +112,20 @@ class ProductCard extends ConsumerWidget {
                     bottomRight: Radius.circular(17.0),
                   ),
                   child: GestureDetector(
-                    onTap: onAddTap,
+                    onTap: () {
+                    ref.read(cartProvider.notifier).toggleCart(product);
+                  },
                     child: Container(
                       padding: const EdgeInsets.all(10.0),
                       decoration: BoxDecoration(
                         color: Colors.black,
                         borderRadius: BorderRadius.circular(8.0),
                       ),
-                      child: const Icon(
-                        Icons.add,
-                        color: Colors.white,
-                        size: 14.0,
-                      ),
+                      child: Icon(
+              isInCart ? Icons.delete : Icons.add,  
+              color: isInCart ? Colors.red : Colors.white,size: 14.0,  
+            ),
+                      
                     ),
                   ),
                 ),

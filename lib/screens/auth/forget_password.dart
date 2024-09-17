@@ -12,11 +12,13 @@ class ForgetPasswordScreen extends StatefulWidget {
 class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
   @override
   Widget build(BuildContext context) {
-    // Get the keyboard height
+    // Get the height of the keyboard
     final keyboardHeight = MediaQuery.of(context).viewInsets.bottom;
 
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+       backgroundColor: Color.fromARGB(255, 241, 237, 237),
+      resizeToAvoidBottomInset: false, 
+    
       body: Stack(
         children: [
           Positioned(
@@ -86,57 +88,50 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
               const SizedBox(height: 30),
               Expanded(
                 flex: 3,
-                child: Stack(
-                  children: [
-                    Positioned(
-                      top: 0,
-                      left: 0,
-                      right: 0,
-                      child: Container(
-                        padding: const EdgeInsets.all(20),
-                        decoration: const BoxDecoration(
-                          color: Color.fromARGB(255, 241, 237, 237),
-                        ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const SizedBox(height: 60),
-                            buildTextField(
-                                labelText: 'Email and Mobile Number'),
-                            const SizedBox(height: 210),
-                            Padding(
-                              padding: EdgeInsets.only(bottom: keyboardHeight),
-                              child: ElevatedButton(
-                                onPressed: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => const OtpScreen(),
-                                      ));
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.black,
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 150, vertical: 15),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                ),
-                                child: const Text(
-                                  'Submit',
-                                  style: TextStyle(
-                                    color: Color.fromARGB(255, 255, 255, 255),
-                                    fontSize: 20,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            const SizedBox(height: 220),
-                          ],
-                        ),
-                      ),
+                child: SingleChildScrollView(
+                  padding: EdgeInsets.only(bottom: keyboardHeight),
+                  child: Container(
+                    padding: const EdgeInsets.all(20),
+                    decoration: const BoxDecoration(
+                      color: Color.fromARGB(255, 241, 237, 237),
                     ),
-                  ],
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        const SizedBox(height: 60),
+                        buildTextField(
+                          labelText: 'Email and Mobile Number',
+                        ),
+                        const SizedBox(height: 60),
+                        ElevatedButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const OtpScreen(),
+                              ),
+                            );
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.black,
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 150, vertical: 15),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                          ),
+                          child: const Text(
+                            'Submit',
+                            style: TextStyle(
+                              color: Color.fromARGB(255, 255, 255, 255),
+                              fontSize: 20,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 100), // Adjust the spacing as necessary
+                      ],
+                    ),
+                  ),
                 ),
               ),
             ],

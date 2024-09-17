@@ -237,9 +237,7 @@ class _NewArrivalScreenState extends ConsumerState<NewArrivalScreen> {
                   final product = filteredProducts[index];
                   return ProductCard(
                     product: product,
-                    onAddTap: () {
-                      // Handle add to cart tap
-                    },
+                   
                     
                   );
                 },

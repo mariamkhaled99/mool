@@ -1,9 +1,30 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mool/models/products.dart';
 
+
+class CartItem {
+  final Product product;
+  int quantity;
+
+  CartItem({
+    required this.product,
+    required this.quantity,
+  });
+}
+
 class CartNotifier extends StateNotifier<List<Product>> {
   // Constructor initializes the notifier with an empty cart.
   CartNotifier() : super([]);
+
+  void toggleCart(Product product) {
+    if (state.contains(product)) {
+      // If the product is already in the favorites list, remove it.
+      state = state.where((p) => p != product).toList();
+    } else {
+      // If the product is not in the favorites list, add it.
+      state = [...state, product];
+    }
+  }
 
   // Method to add a product to the cart.
   void addProductToCart(Product product) {
@@ -39,3 +60,7 @@ class CartNotifier extends StateNotifier<List<Product>> {
     return state.fold(0.0, (total, product) => total + product.price);
   }
 }
+final cartProvider = StateNotifierProvider<CartNotifier, List<Product>>((ref) {
+  return CartNotifier();
+});
+

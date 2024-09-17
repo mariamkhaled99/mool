@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:mool/screens/home.dart';
 import 'package:mool/utils/form_utils.dart';
 import 'package:mool/screens/auth/signup.dart';
-// import 'package:mool/screens/auth/reset_password.dart';
 import 'package:mool/screens/auth/forget_password.dart';
-
-
-
 
 class SigninScreen extends StatefulWidget {
   const SigninScreen({super.key});
@@ -18,6 +15,9 @@ class _SigninScreenState extends State<SigninScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromARGB(255, 241, 237, 237),
+      resizeToAvoidBottomInset:
+          false, // Prevent screen from resizing when keyboard appears
       body: Stack(
         children: [
           Positioned(
@@ -44,7 +44,6 @@ class _SigninScreenState extends State<SigninScreen> {
                       ),
                     ),
                     Positioned(
-                      // top: 20,
                       left: 0,
                       right: 0,
                       child: Center(
@@ -62,20 +61,18 @@ class _SigninScreenState extends State<SigninScreen> {
                           SizedBox(height: 50),
                           Text(
                             'Sign In',
-                            // textAlign: TextAlign.left,
                             style: TextStyle(
-                              color: Color.fromARGB(255, 255, 255, 255),
+                              color: Colors.white,
                               fontSize: 40,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsets.only(
-                                left: 20.0), // Adjust the value as needed
+                            padding: EdgeInsets.only(left: 20.0),
                             child: Text(
-                              'Welcome !',
+                              'Welcome!',
                               style: TextStyle(
-                                color: Color.fromARGB(255, 255, 255, 255),
+                                color: Colors.white,
                                 fontSize: 40,
                                 fontWeight: FontWeight.bold,
                               ),
@@ -91,163 +88,109 @@ class _SigninScreenState extends State<SigninScreen> {
               const SizedBox(height: 30),
               Expanded(
                 flex: 3,
-                child: Stack(
-                  children: [
-                    Positioned(
-                      top: 0,
-                      left: 0,
-                      right: 0,
-                      child: Container(
-                        padding: const EdgeInsets.all(20),
-                        decoration: const BoxDecoration(
-                          color: Color.fromARGB(255, 241, 237, 237),
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(40),
-                            topRight: Radius.circular(40),
+                child: SingleChildScrollView(
+                  padding: EdgeInsets.only(
+                      bottom: MediaQuery.of(context)
+                          .viewInsets
+                          .bottom), // Adjusts for keyboard
+                  child: Container(
+                    padding: const EdgeInsets.all(20),
+                    decoration: const BoxDecoration(
+                      color: Color.fromARGB(255, 241, 237, 237),
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(40),
+                        topRight: Radius.circular(40),
+                      ),
+                    ),
+                    child: Column(
+                      children: [
+                        const SizedBox(height: 10),
+                        buildTextField(labelText: 'Email'),
+                        const SizedBox(height: 10),
+                        buildTextField(
+                            labelText: 'Password', obscureText: true),
+                        const SizedBox(height: 20),
+                        InkWell(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    const ForgetPasswordScreen(),
+                              ),
+                            );
+                          },
+                          child: const Padding(
+                            padding: EdgeInsets.only(left: 160.0),
+                            child: Text(
+                              'Forget Password?',
+                              textAlign: TextAlign.right,
+                              style: TextStyle(
+                                color: Color(0xFF33CCCC),
+                              ),
+                            ),
                           ),
                         ),
-                        child: Column(
+                        const SizedBox(height: 20),
+                        ElevatedButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => HOmeScreen(),
+                              ),
+                            );
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.black,
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 150, vertical: 15),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                          ),
+                          child: const Text(
+                            'Sign In',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 20),
+                        Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            const SizedBox(height: 10),
-                            buildTextField(labelText: 'Email'),
-                            const SizedBox(height: 10),
-                            buildTextField(
-                                labelText: 'Password', obscureText: true),
-                            const SizedBox(height: 20),
+                            const Text(
+                              'Don’t Have an account? ',
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
                             InkWell(
                               onTap: () {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => const ForgetPasswordScreen(),
+                                    builder: (context) => const SignupScreen(),
                                   ),
                                 );
                               },
-                              child: const Padding(
-                                padding: EdgeInsets.only(
-                                    left: 160.0), // Apply right padding
-                                child: Text(
-                                  'Forget Password ?',
-                                  textAlign: TextAlign.right,
-                                  style: TextStyle(
-                                    color: Color(
-                                        0xFF33CCCC), // Add your desired color here
-                                  ),
-                                ),
-                              ),
-                            ),
-                            const SizedBox(height: 20),
-                            ElevatedButton(
-                              onPressed: () {
-                                // Add signup logic here
-                              },
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.black,
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 150, vertical: 15),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                              ),
                               child: const Text(
-                                'Sign Up',
+                                'Sign up',
                                 style: TextStyle(
-                                  color: Color.fromARGB(255, 255, 255, 255),
-                                  fontSize: 20,
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
                                 ),
                               ),
                             ),
-                            const SizedBox(height: 20),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                const Text(
-                                  'Don’t Have account ? ',
-                                  style: TextStyle(
-                                    color: Color.fromARGB(255, 0, 0, 0),
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                InkWell(
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              const SignupScreen()),
-                                    );
-                                  },
-                                  child: const Text(
-                                    'signup',
-                                    style: TextStyle(
-                                      color: Color.fromARGB(255, 0, 0, 0),
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(height: 20),
-                            const Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                SizedBox(
-                                  width: 100,
-                                  child: Divider(
-                                    thickness: 2,
-                                    color: Color.fromARGB(255, 0, 0, 0),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 10),
-                                  child: Text(
-                                    'OR',
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 100,
-                                  child: Divider(
-                                    thickness: 2,
-                                    color: Colors.black,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(height: 20),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Image.asset(
-                                  'assets/images/Apple.png',
-                                  width: 50,
-                                  height: 50,
-                                ),
-                                const SizedBox(width: 20),
-                                Image.asset(
-                                  'assets/images/Google.png',
-                                  width: 50,
-                                  height: 50,
-                                ),
-                                const SizedBox(width: 20),
-                                Image.asset(
-                                  'assets/images/Meta.png',
-                                  width: 50,
-                                  height: 50,
-                                ),
-                              ],
-                            ),
-                            const SizedBox(height: 80),
                           ],
                         ),
-                      ),
+                        const SizedBox(height: 20),
+                      ],
                     ),
-                  ],
+                  ),
                 ),
               ),
             ],

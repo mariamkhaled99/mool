@@ -53,13 +53,13 @@ class _FiltersScreenState extends State<FiltersScreen> {
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      IconButton(
-                        icon: const Icon(Icons.arrow_back, color: Colors.white),
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                      ),
-                      const SizedBox(width: 10),
+                       IconButton(
+                      icon: const Icon(Icons.arrow_back, color: Colors.white),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                    ),
+                      const SizedBox(width: 20),
                       const Text(
                         "Filters",
                         style: TextStyle(

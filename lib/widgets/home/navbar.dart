@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:mool/models/products.dart';
+import 'package:mool/screens/account/my_account.dart';
+import 'package:mool/screens/cart.dart';
 import 'package:mool/screens/categories.dart';
 import 'package:mool/screens/home.dart';
 import 'package:mool/screens/my_list.dart';
@@ -74,7 +75,7 @@ class _CustomNavbarState extends ConsumerState<CustomNavbar> {
                   ),
                   onPressed: () => Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (context) => MyListScreen(),
+                          builder: (context) => const MyListScreen(),
                         ),
                       )),
               IconButton(
@@ -84,8 +85,11 @@ class _CustomNavbarState extends ConsumerState<CustomNavbar> {
                       ? const Color(0xFF33CCCC)
                       : Colors.white,
                 ),
-                onPressed: () => _onItemTapped(3),
-              ),
+                onPressed: () => Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => const CartScreen(),
+                        ),
+                      )),
               IconButton(
                 icon: Icon(
                   Icons.account_circle,
@@ -93,8 +97,11 @@ class _CustomNavbarState extends ConsumerState<CustomNavbar> {
                       ? const Color(0xFF33CCCC)
                       : Colors.white,
                 ),
-                onPressed: () => _onItemTapped(4),
-              ),
+                onPressed: () => Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => const MyAccountScreen(),
+                        ),
+                      )),
             ],
           ),
         ),

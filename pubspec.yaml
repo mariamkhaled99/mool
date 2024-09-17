@@ -42,6 +42,9 @@ dependencies:
   floating_frosted_bottom_bar: ^0.0.1
   smooth_page_indicator: ^1.2.0+3
   flutter_riverpod: ^2.5.1
+  flutter_rating: ^2.0.2
+  flutter_rating_bar: ^4.0.1
+  easy_stepper: ^0.8.5+1
 
 
 dev_dependencies:
@@ -96,6 +99,16 @@ flutter:
     - assets/images/filter-search.png
     - assets/images/sort.png
     - assets/images/slider/Ellipse 8.png
+    - assets/images/i.png
+    - assets/images/complete 1.png
+    - assets/images/visa.png
+    - assets/images/PayMob.png
+    - assets/images/Mastercard.png
+    - assets/images/shield-tick.png
+    - assets/images/back-square.png
+    - assets/images/No Address.png
+    - assets/images/search-normal.png
+    - assets/images/logo2.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

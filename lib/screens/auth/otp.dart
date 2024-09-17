@@ -37,7 +37,9 @@ class _OtpScreenState extends State<OtpScreen> {
     final keyboardHeight = MediaQuery.of(context).viewInsets.bottom;
 
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+      backgroundColor: Color.fromARGB(255, 241, 237, 237),
+      resizeToAvoidBottomInset: false, 
+     
       body: Stack(
         children: [
           Positioned(
